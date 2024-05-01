@@ -11,12 +11,16 @@ public class S3_1929 {
         int n = sc.nextInt();
         boolean b;
 
+        if (m == 1)
+            m++;
+
         for (int i = m; i <= n; i++) {
             b = true;
 
             for (int j = 2; j*j <= i; j++) {
                 if (i % j == 0) {
                     b = false;
+                    break;
                 }
             }
 
