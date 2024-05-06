@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class S2_11724 {
 
-    static ArrayList<Boolean> visit = new ArrayList<>();
+    static boolean[] visit;
     static int[][] arr;
 
     public static void main(String[] args) throws IOException {
@@ -20,6 +20,7 @@ public class S2_11724 {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
         arr = new int[n + 1][n + 1];
+        visit = new boolean[n + 1];
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -28,26 +29,13 @@ public class S2_11724 {
             arr[u][v] = arr[v][u] = 1;
         }
 
-        for (int i = 0; i <= n; i++) {
-            visit.add(false);
-        }
-
-        visit.set(0, true);
-
         int count = 1;
         bfs(1);
 
-        while (true) {
-            if (visit.contains(false)) {
-                for (int i = 1; i <= n; i++) {
-                    if (!visit.get(i)) {
-                        bfs(i);
-                        count++;
-                    }
-                }
-            }
-            else {
-                break;
+        for (int i = 1; i <= n; i++) {
+            if (!visit[i]) {
+                bfs(i);
+                count++;
             }
         }
 
@@ -57,7 +45,8 @@ public class S2_11724 {
     }
 
     public static void bfs(int start) {
-        visit.set(start, true);
+        visit[start] = true;
+
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start);
 
@@ -65,9 +54,9 @@ public class S2_11724 {
             int temp = queue.poll();
 
             for (int i = 0; i < arr.length; i++) {
-                if (arr[temp][i] == 1 && visit.get(i) == false) {
+                if (arr[temp][i] == 1 && !visit[i]) {
                     queue.add(i);
-                    visit.set(i, true);
+                    visit[i] = true;
                 }
             }
         }
