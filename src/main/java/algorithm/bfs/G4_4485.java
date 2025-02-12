@@ -1,3 +1,5 @@
+package algorithm.bfs;
+
 import java.io.*;
 import java.util.*;
 

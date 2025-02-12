@@ -1,3 +1,5 @@
+package algorithm.graph.dijkstra;
+
 import java.io.*;
 import java.util.*;
 
