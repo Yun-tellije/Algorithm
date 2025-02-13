@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class swea_1953 {
+public class SW_TEST_1953 {
 
 	static int n; // 세로 크기
 	static int m; // 가로 크기
