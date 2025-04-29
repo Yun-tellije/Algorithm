@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
@@ -26,28 +27,15 @@ public class Main {
         		parent[i] = i;
         	}
         	Map<String, Integer> map = new HashMap<>();
-        	int index = 0;
+        	AtomicInteger index = new AtomicInteger(0); 
         	
         	for (int i = 0; i < n; i++) {
         		StringTokenizer st = new StringTokenizer(br.readLine());
         		String s1 = st.nextToken();
         		String s2 = st.nextToken();
-        		int idx1, idx2;
-        		
-        		if (map.containsKey(s1)) {
-        			idx1 = map.get(s1);
-        		} else {
-        			map.put(s1, index);
-        			idx1 = index++;
-        		}
-        		
-        		if (map.containsKey(s2)) {
-        			idx2 = map.get(s2);
-        		} else {
-        			map.put(s2, index);
-        			idx2 = index++;
-        		}
-        		
+        	    int idx1 = map.computeIfAbsent(s1, k -> index.getAndIncrement());
+        	    int idx2 = map.computeIfAbsent(s2, k -> index.getAndIncrement());
+
         		if (find(idx1) != find(idx2)) {
         			union(idx1, idx2);
         		}
