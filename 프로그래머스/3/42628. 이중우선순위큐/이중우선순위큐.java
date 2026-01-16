@@ -6,9 +6,7 @@ class Solution {
         
         PriorityQueue<Integer> minPq = new PriorityQueue<>();
         PriorityQueue<Integer> maxPq = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        
-        int size = 0;
-        
+                
         for (int i = 0; i < operations.length; i++) {
             String[] arr = operations[i].split(" ");
             
@@ -17,9 +15,8 @@ class Solution {
                 
                 minPq.add(num);
                 maxPq.add(num);
-                size++;
             } else {
-                if (size == 0) continue;
+                if (minPq.isEmpty()) continue;
                 
                 int num = Integer.parseInt(arr[1]);
                 
@@ -30,12 +27,10 @@ class Solution {
                     int min = minPq.poll();
                     maxPq.remove(min);
                 }
-                size--;
             }
-            
         }
         
-        if (size == 0) {
+        if (minPq.isEmpty()) {
             answer[0] = answer[1] = 0;
         } else {
             answer[0] = maxPq.poll();
